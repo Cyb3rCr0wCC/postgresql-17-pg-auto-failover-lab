@@ -1,0 +1,77 @@
+services:
+
+  monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pgaf-monitor
+    hostname: monitor
+    user: postgres
+
+    environment:
+      PGDATA: /var/lib/postgresql/monitor
+
+    command: ["sleep", "infinity"]
+
+    volumes:
+      - monitor_data:/var/lib/postgresql/monitor
+
+    networks:
+      pgaf:
+        ipv4_address: 172.30.0.10
+
+
+  pg1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pgaf-pg1
+    hostname: pg1
+    user: postgres
+
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    command: ["sleep", "infinity"]
+
+    volumes:
+      - pg1_data:/var/lib/postgresql/data/pgdata
+
+    networks:
+      pgaf:
+        ipv4_address: 172.30.0.11
+
+
+  pg2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pgaf-pg2
+    hostname: pg2
+    user: postgres
+
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    command: ["sleep", "infinity"]
+
+    volumes:
+      - pg2_data:/var/lib/postgresql/data/pgdata
+
+    networks:
+      pgaf:
+        ipv4_address: 172.30.0.12
+
+
+volumes:
+  monitor_data:
+  pg1_data:
+  pg2_data:
+
+
+networks:
+  pgaf:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
