@@ -263,7 +263,7 @@ docker exec -u postgres pgaf-pg1 mc ls myminio/pg-wal-archive/wal/
 
 Here's expected outputs for above commands:
 
-![image-20261024112134516](/home/cybercrow/snap/typora/119/.config/Typora/typora-user-images/image-20261024112134516.png)
+![image-20261024112134516](./imgs/image-20261024112134516.png)
 
 ## 6. Take a Base Backup
 
@@ -279,7 +279,7 @@ pg_basebackup -h localhost -U postgres -D - -Ft -X fetch -c fast -z \
 docker exec -u postgres pgaf-pg1 mc ls myminio/pg-wal-archive/base/
 ```
 
-![image-20261024114028540](/home/cybercrow/snap/typora/119/.config/Typora/typora-user-images/image-20261024114028540.png)
+![image-20261024114028540](./imgs/image-20261024114028540.png)
 
 What the flags mean:
 
@@ -339,7 +339,7 @@ The `now()` value is the important one. In my run it printed `2026-10-24 05:06:5
 
 Expected output for above commands:
 
-![image-20261024114158892](/home/cybercrow/snap/typora/119/.config/Typora/typora-user-images/image-20261024114158892.png)
+![image-20261024114158892](./imgs/image-20261024114158892.png)
 
 Save it for later (use your own value):
 
@@ -404,7 +404,7 @@ rm -f postmaster.pid standby.signal recovery.signal
 
 Expected output:
 
-![image-20261024114520197](/home/cybercrow/snap/typora/119/.config/Typora/typora-user-images/image-20261024114520197.png)
+![image-20261024114520197](./imgs/image-20261024114520197.png)
 
 Now tell PostgreSQL how to recover:
 
@@ -564,7 +564,7 @@ But in my case I got my data back and now I need to copy that data from temporar
 
 First check if **simulation_db** really doesnt contain any tables.
 
-![image-20261024115113843](/home/cybercrow/snap/typora/119/.config/Typora/typora-user-images/image-20261024115113843.png)
+![image-20261024115113843](./imgs/image-20261024115113843.png)
 
 ## 12. Copy the Data Back into the Live Cluster
 
@@ -587,11 +587,11 @@ Check the result on the live cluster, then `exit` the scratch container. Because
 
 Expected ouput:
 
-![image-20261024115219104](/home/cybercrow/snap/typora/119/.config/Typora/typora-user-images/image-20261024115219104.png)
+![image-20261024115219104](./imgs/image-20261024115219104.png)
 
 Check if we could get table back.
 
-![image-20261024115257251](/home/cybercrow/snap/typora/119/.config/Typora/typora-user-images/image-20261024115257251.png)
+![image-20261024115257251](./imgs/image-20261024115257251.png)
 
 ## 13. Full Disaster Recovery: Both Nodes Gone
 
